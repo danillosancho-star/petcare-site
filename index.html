@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PetCare Pro – O amor que conecta, o cuidado que protege.</title>
+  <meta name="description" content="PetCare Pro: a rede social para pets com gestão completa de saúde animal. Registre vacinas, medicamentos e compartilhe momentos. Disponível no Android."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:    #1D9E75;
+      --green-d:  #157A5A;
+      --green-l:  #E6F7F1;
+      --navy:     #1B2B5E;
+      --gold:     #F5A623;
+      --white:    #FFFFFF;
+      --offwhite: #F5FAF8;
+      --gray:     #6B7280;
+      --radius:   16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: #1a1a2e;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(29,158,117,0.1);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-paw {
+      width: 38px; height: 38px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800; font-size: 18px; color: var(--navy);
+    }
+    .nav-name span { color: var(--green); }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav ul a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--navy); transition: color .2s; }
+    nav ul a:hover { color: var(--green); }
+    .nav-dl {
+      background: var(--green); color: var(--white) !important;
+      padding: 10px 20px; border-radius: 8px;
+      font-weight: 600 !important; transition: background .2s !important;
+    }
+    .nav-dl:hover { background: var(--green-d) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0d5c43 0%, var(--green) 45%, #1a8a65 100%);
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -150px; right: -150px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '🐾';
+      position: absolute; bottom: -20px; right: 8%;
+      font-size: 320px; opacity: .06;
+      transform: rotate(-15deg);
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+      font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 800; color: var(--white);
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: #FFDF80; }
+    .hero-slogan {
+      font-size: 18px; color: rgba(255,255,255,0.8);
+      font-style: italic; margin-bottom: 16px;
+      border-left: 3px solid rgba(255,255,255,0.4);
+      padding-left: 14px;
+    }
+    .hero p {
+      font-size: 16px; color: rgba(255,255,255,0.72);
+      max-width: 480px; margin-bottom: 36px; line-height: 1.75;
+    }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-play {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--green-d);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 15px;
+      padding: 14px 26px; border-radius: var(--radius);
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-play:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,0.25); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600; font-size: 15px;
+      padding: 14px 26px; border-radius: var(--radius);
+      text-decoration: none; border: 1.5px solid rgba(255,255,255,0.35);
+      transition: background .2s, border-color .2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+    /* App Card no Hero */
+    .hero-app-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .app-icon-big { font-size: 72px; margin-bottom: 16px; display: block; }
+    .app-name-big {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px; font-weight: 800; color: var(--white);
+      margin-bottom: 6px;
+    }
+    .app-by { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+    .stars { font-size: 20px; letter-spacing: 2px; margin-bottom: 4px; }
+    .stars-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+    .app-features-mini { list-style: none; text-align: left; }
+    .app-features-mini li {
+      font-size: 14px; color: rgba(255,255,255,0.8);
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .app-features-mini li:last-child { border-bottom: none; }
+
+    /* ── FEATURES ── */
+    #funcionalidades { background: var(--offwhite); padding: 96px 48px; }
+    .features-header { max-width: 600px; margin: 0 auto 56px; text-align: center; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
+      color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+    }
+    .section-sub { font-size: 16px; color: var(--gray); line-height: 1.7; }
+    .features-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid rgba(29,158,117,0.1);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(29,158,117,0.12); }
+    .feature-emoji { font-size: 36px; margin-bottom: 16px; display: block; }
+    .feature-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+
+    /* ── SOCIAL ── */
+    #petgram {
+      background: var(--navy);
+      padding: 96px 48px;
+      text-align: center;
+    }
+    .petgram-inner { max-width: 700px; margin: 0 auto; }
+    .petgram-inner .section-label { color: var(--gold); }
+    .petgram-inner .section-title { color: var(--white); }
+    .petgram-inner .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 40px; }
+    .petgram-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin: 40px auto; max-width: 500px;
+    }
+    .petgram-cell {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background .2s;
+    }
+    .petgram-cell:hover { background: rgba(255,255,255,0.14); }
+
+    /* ── AI ── */
+    #petguide {
+      background: linear-gradient(135deg, var(--green-l), #d0f0e5);
+      padding: 96px 48px;
+    }
+    .petguide-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .chat-bubble-wrap { display: flex; flex-direction: column; gap: 14px; }
+    .chat-bubble {
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14px; line-height: 1.6;
+      max-width: 85%;
+    }
+    .chat-user {
+      background: var(--green); color: var(--white);
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .chat-ai {
+      background: var(--white); color: var(--navy);
+      align-self: flex-start; border-bottom-left-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .chat-ai-label {
+      font-size: 11px; font-weight: 700; color: var(--green);
+      margin-bottom: 4px; text-transform: uppercase; letter-spacing: .05em;
+    }
+
+    /* ── PRIVACY ── */
+    #privacidade {
+      background: var(--white);
+      padding: 96px 48px;
+    }
+    .privacy-inner { max-width: 800px; margin: 0 auto; }
+    .privacy-inner .section-title { margin-bottom: 8px; }
+    .privacy-inner .section-sub { margin-bottom: 40px; }
+    .privacy-sections { display: flex; flex-direction: column; gap: 20px; }
+    .privacy-item {
+      background: var(--offwhite);
+      border-radius: 12px;
+      padding: 24px 28px;
+      border-left: 4px solid var(--green);
+    }
+    .privacy-item h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; font-weight: 700; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .privacy-item p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+    .privacy-full-link {
+      display: inline-block; margin-top: 32px;
+      color: var(--green); font-weight: 600; font-size: 15px;
+      text-decoration: none; border-bottom: 2px solid var(--green-l);
+      transition: border-color .2s;
+    }
+    .privacy-full-link:hover { border-color: var(--green); }
+
+    /* ── DOWNLOAD CTA ── */
+    #baixar {
+      background: linear-gradient(135deg, var(--green) 0%, #0d5c43 100%);
+      padding: 96px 48px;
+      text-align: center;
+    }
+    #baixar h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 50px); font-weight: 800;
+      color: var(--white); line-height: 1.2; margin-bottom: 16px;
+    }
+    #baixar p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 40px; }
+    .download-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--white); color: var(--navy);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 15px;
+      padding: 16px 32px; border-radius: var(--radius);
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.2);
+      transition: transform .2s;
+    }
+    .dl-btn:hover { transform: scale(1.04); }
+    .dl-btn.coming {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .dl-icon { font-size: 22px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1a0f;
+      padding: 40px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .footer-brand span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800; font-size: 16px; color: var(--white);
+    }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      nav ul { display: none; }
+      #funcionalidades, #petgram, #petguide, #privacidade, #baixar { padding: 64px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-app-card { display: none; }
+      .petguide-inner { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 28px 20px; flex-direction: column; text-align: center; }
+      .petgram-grid { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-paw">🐾</div>
+    <span class="nav-name">PetCare <span>Pro</span></span>
+  </a>
+  <ul>
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#petgram">PetGram</a></li>
+    <li><a href="#petguide">IA PetGuide</a></li>
+    <li><a href="#privacidade">Privacidade</a></li>
+    <li><a href="#baixar" class="nav-dl">📲 Baixar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">🐾 Novo App · Android disponível</span>
+      <h1>Cuide, registre e<br/><em>compartilhe</em> a vida<br/>do seu pet</h1>
+      <p class="hero-slogan">"O amor que conecta, o cuidado que protege."</p>
+      <p>PetCare Pro é a rede social para pets com gestão completa de saúde animal. Vacinas, medicamentos, peso, exames — tudo em um lugar só.</p>
+      <div class="hero-buttons">
+        <a href="#baixar" class="btn-play">📲 Baixar na Play Store</a>
+        <a href="#funcionalidades" class="btn-ghost">Ver funcionalidades</a>
+      </div>
+    </div>
+    <div class="hero-app-card">
+      <span class="app-icon-big">🐕</span>
+      <div class="app-name-big">PetCare Pro</div>
+      <div class="app-by">by Veepie Soluções Digitais</div>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="stars-label">Saúde + Social para pets</div>
+      <ul class="app-features-mini">
+        <li>🏥 Histórico de saúde completo</li>
+        <li>📸 Feed social PetGram</li>
+        <li>🤖 IA PetGuide integrada</li>
+        <li>📍 Vets e petshops próximos</li>
+        <li>🔔 Lembretes automáticos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONALIDADES -->
+<section id="funcionalidades">
+  <div class="features-header">
+    <p class="section-label">O que o app faz</p>
+    <h2 class="section-title">Tudo que seu pet precisa,<br/>na palma da sua mão</h2>
+    <p class="section-sub">Do histórico de vacinas ao feed social, o PetCare Pro reúne o essencial do cuidado com pets em um só app.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-emoji">💉</span>
+      <h3>Vacinas & Medicamentos</h3>
+      <p>Registre todas as vacinas e medicamentos com datas, doses e lembretes automáticos para nunca perder uma aplicação.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">⚖️</span>
+      <h3>Controle de Peso</h3>
+      <p>Acompanhe a evolução do peso do seu pet com gráficos e histórico completo para monitorar a saúde ao longo do tempo.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">🔬</span>
+      <h3>Exames & Cirurgias</h3>
+      <p>Mantenha todos os exames laboratoriais e procedimentos cirúrgicos organizados e acessíveis a qualquer momento.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">📸</span>
+      <h3>Feed Social PetGram</h3>
+      <p>Compartilhe fotos e momentos especiais do seu pet com uma comunidade de tutores apaixonados.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">📍</span>
+      <h3>Vets & Petshops</h3>
+      <p>Encontre veterinários e petshops próximos a você com informações de contato e avaliações.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">🤖</span>
+      <h3>IA PetGuide</h3>
+      <p>Tire dúvidas sobre alimentação, comportamento e saúde do seu pet com nosso assistente de inteligência artificial.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PETGRAM -->
+<section id="petgram">
+  <div class="petgram-inner">
+    <p class="section-label">Rede Social</p>
+    <h2 class="section-title">PetGram — o Instagram<br/>dos pets</h2>
+    <p class="section-sub">Compartilhe os melhores momentos do seu pet, curta fotos de outros tutores e faça parte de uma comunidade que ama animais.</p>
+    <div class="petgram-grid">
+      <div class="petgram-cell">🐶</div>
+      <div class="petgram-cell">🐱</div>
+      <div class="petgram-cell">🐰</div>
+      <div class="petgram-cell">🦜</div>
+      <div class="petgram-cell">🐠</div>
+      <div class="petgram-cell">🐹</div>
+      <div class="petgram-cell">🐕</div>
+      <div class="petgram-cell">😸</div>
+      <div class="petgram-cell">🐾</div>
+    </div>
+    <a href="#baixar" class="btn-play" style="background:var(--gold);color:var(--navy);display:inline-flex;">
+      📲 Entrar na comunidade
+    </a>
+  </div>
+</section>
+
+<!-- PETGUIDE IA -->
+<section id="petguide">
+  <div class="petguide-inner">
+    <div>
+      <p class="section-label">Inteligência Artificial</p>
+      <h2 class="section-title">PetGuide — seu veterinário<br/>de bolso</h2>
+      <p class="section-sub" style="margin-bottom:20px;">Powered by Claude AI, o PetGuide responde suas dúvidas sobre cuidados, alimentação, comportamento e saúde do seu pet — 24 horas por dia, 7 dias por semana.</p>
+      <p class="section-sub">Não substitui a consulta veterinária, mas ajuda você a entender melhor o seu animal e saber quando é hora de ir ao vet.</p>
+    </div>
+    <div class="chat-bubble-wrap">
+      <div class="chat-bubble chat-user">
+        Meu cachorro está comendo muito menos nos últimos 3 dias. Isso é normal?
+      </div>
+      <div class="chat-bubble chat-ai">
+        <div class="chat-ai-label">🤖 PetGuide</div>
+        Diminuição do apetite por 3 dias pode ter várias causas — desde estresse e mudança de ração até problemas de saúde. Se ele também está letárgico, vomitando ou com fezes diferentes, recomendo consulta veterinária. Caso contrário, observe por mais 24h e tente oferecer a ração em local tranquilo. Qual é a raça e idade do seu pet?
+      </div>
+      <div class="chat-bubble chat-user">
+        É um Labrador de 4 anos. Sem outros sintomas.
+      </div>
+      <div class="chat-bubble chat-ai">
+        <div class="chat-ai-label">🤖 PetGuide</div>
+        Labradores de 4 anos costumam ser bastante saudáveis! Variações de apetite sem outros sintomas geralmente não são urgentes. Verifique se houve mudança de rotina, temperatura elevada ou se ele bebeu água normalmente. Se passar de 5 dias sem melhora, agende uma consulta de rotina. 🐾
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACIDADE -->
+<section id="privacidade">
+  <div class="privacy-inner">
+    <p class="section-label">Privacidade & Segurança</p>
+    <h2 class="section-title">Seus dados estão<br/>protegidos</h2>
+    <p class="section-sub">Levamos a privacidade dos nossos usuários a sério. Confira os principais pontos da nossa política.</p>
+    <div class="privacy-sections">
+      <div class="privacy-item">
+        <h3>🔒 O que coletamos</h3>
+        <p>Dados de cadastro (nome e e-mail), informações dos seus pets e fotos que você compartilha. Localização apenas quando você autoriza explicitamente.</p>
+      </div>
+      <div class="privacy-item">
+        <h3>🚫 O que não fazemos</h3>
+        <p>Nunca vendemos ou alugamos seus dados. Não exibimos anúncios baseados em dados pessoais. Não compartilhamos informações com terceiros sem sua autorização.</p>
+      </div>
+      <div class="privacy-item">
+        <h3>🛡️ Como protegemos</h3>
+        <p>Todos os dados são armazenados com criptografia (TLS) na plataforma Supabase. Você pode solicitar exclusão completa da sua conta a qualquer momento.</p>
+      </div>
+      <div class="privacy-item">
+        <h3>⚖️ Seus direitos (LGPD)</h3>
+        <p>Você tem direito de acessar, corrigir, exportar e excluir seus dados a qualquer momento. Entre em contato pelo e-mail privacidade@veepie.com.</p>
+      </div>
+    </div>
+    <a href="privacidade.html" class="privacy-full-link">Ler a Política de Privacidade completa →</a>
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section id="baixar">
+  <h2>Baixe agora e cuide<br/>melhor do seu pet 🐾</h2>
+  <p>Gratuito para começar. Disponível para Android.</p>
+  <div class="download-buttons">
+    <a href="#" class="dl-btn">
+      <span class="dl-icon">▶</span>
+      <div>
+        <div style="font-size:11px;font-weight:500;opacity:.7;">Disponível no</div>
+        <div>Google Play</div>
+      </div>
+    </a>
+    <a class="dl-btn coming">
+      <span class="dl-icon">🍎</span>
+      <div>
+        <div style="font-size:11px;font-weight:500;">Em breve na</div>
+        <div>App Store</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span>🐾 PetCare Pro</span>
+  </div>
+  <p>© 2026 Veepie Soluções Digitais · Feira de Santana, BA</p>
+  <div class="footer-links">
+    <a href="privacidade.html">Política de Privacidade</a>
+    <a href="https://veepie.com">veepie.com</a>
+    <a href="mailto:contato@veepie.com">Contato</a>
+  </div>
+</footer>
+
+</body>
+</html>
