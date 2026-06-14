@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Excluir Conta – PetCare Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #1D9E75;
+      --green-l: #E6F7F1;
+      --navy: #1B2B5E;
+      --red: #DC2626;
+      --red-l: #FEF2F2;
+      --gray: #6B7280;
+      --white: #FFFFFF;
+      --offwhite: #F5FAF8;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--offwhite);
+      color: #1a1a2e;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    header {
+      background: var(--green);
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .header-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    header h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px; font-weight: 800; color: #fff;
+    }
+    header p { font-size: 13px; color: rgba(255,255,255,0.75); }
+
+    .container {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    .warning-box {
+      background: var(--red-l);
+      border: 1px solid #FECACA;
+      border-left: 4px solid var(--red);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .warning-icon { font-size: 24px; flex-shrink: 0; }
+    .warning-box h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px; font-weight: 700; color: var(--red);
+      margin-bottom: 6px;
+    }
+    .warning-box p { font-size: 14px; color: #7F1D1D; line-height: 1.6; }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      border: 1px solid #E5E7EB;
+    }
+    .card h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .step-list { list-style: none; counter-reset: steps; }
+    .step-list li {
+      counter-increment: steps;
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-l); color: var(--green);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text strong {
+      display: block;
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .step-text span { font-size: 13px; color: var(--gray); }
+
+    .data-list { list-style: none; }
+    .data-list li {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 14px; color: #374151;
+    }
+    .data-list li:last-child { border-bottom: none; }
+    .data-list .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0;
+    }
+    .data-list .dot.keep { background: var(--green); }
+
+    .email-card {
+      background: var(--green-l);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .email-card p { font-size: 14px; color: var(--gray); margin-bottom: 8px; }
+    .email-card a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--green);
+      text-decoration: none;
+    }
+    .email-card a:hover { text-decoration: underline; }
+    .email-card .note {
+      font-size: 12px; color: var(--gray);
+      margin-top: 10px; display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 13px; color: var(--gray);
+    }
+    footer a { color: var(--green); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-icon">🐾</div>
+  <div>
+    <h1>PetCare Pro</h1>
+    <p>Exclusão de conta e dados</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="warning-box">
+    <span class="warning-icon">⚠️</span>
+    <div>
+      <h2>Atenção: esta ação é irreversível</h2>
+      <p>Ao excluir sua conta, todos os seus dados serão permanentemente removidos dos nossos sistemas. Essa ação não pode ser desfeita. Certifique-se de que deseja prosseguir antes de continuar.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Como solicitar a exclusão da conta</h2>
+    <ul class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Envie um e-mail para privacidade@veepie.com</strong>
+          <span>Use o e-mail cadastrado na sua conta PetCare Pro</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Informe no assunto: "Excluir minha conta PetCare Pro"</strong>
+          <span>Isso ajuda a identificar e priorizar sua solicitação</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Aguarde a confirmação em até 5 dias úteis</strong>
+          <span>Você receberá um e-mail confirmando a exclusão da conta e de todos os dados</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Exclusão concluída em até 30 dias</strong>
+          <span>Após a confirmação, seus dados serão removidos definitivamente de todos os nossos sistemas</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🗑️ O que será excluído</h2>
+    <ul class="data-list">
+      <li><span class="dot"></span> Perfil de usuário (nome, e-mail, foto)</li>
+      <li><span class="dot"></span> Todos os pets cadastrados e seus históricos</li>
+      <li><span class="dot"></span> Vacinas, medicamentos, pesos, exames e cirurgias</li>
+      <li><span class="dot"></span> Posts, curtidas e comentários no PetGram</li>
+      <li><span class="dot"></span> Conversas com o assistente PetGuide</li>
+      <li><span class="dot"></span> Histórico de assinaturas e pagamentos</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📩 Enviar solicitação</h2>
+    <div class="email-card">
+      <p>Envie sua solicitação para:</p>
+      <a href="mailto:privacidade@veepie.com?subject=Excluir%20minha%20conta%20PetCare%20Pro">privacidade@veepie.com</a>
+      <span class="note">Responderemos em até 5 dias úteis · Exclusão concluída em até 30 dias</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Veepie Indústria e Comércio de Sistemas Ltda. ·
+  <a href="privacidade.html">Política de Privacidade</a> ·
+  <a href="index.html">Voltar ao PetCare Pro</a>
+</footer>
+
+</body>
+</html>
